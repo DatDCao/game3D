@@ -28,19 +28,23 @@ public class CoinLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (m_AudioSource && m_CoinSound)
+        if (other.tag == "Player")
         {
-            m_AudioSource.PlayOneShot(m_CoinSound);
+            if (m_AudioSource && m_CoinSound)
+            {
+                m_AudioSource.PlayOneShot(m_CoinSound);
+            }
+
+            if (m_Colider)
+            {
+                m_Colider.enabled = false;
+            }
+            if (m_Meshreanderer)
+            {
+                m_Meshreanderer.enabled = false;
+            }
         }
 
-        if (m_Colider)
-        {
-            m_Colider.enabled = false;
-        }
-        if (m_Meshreanderer)
-        {
-            m_Meshreanderer.enabled = false;
-        }
 
     }
 }

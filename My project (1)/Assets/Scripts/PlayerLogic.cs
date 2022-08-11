@@ -38,9 +38,21 @@ public class PlayerLogic : MonoBehaviour
         //Debug.Log("vetical" + m_VerticalInput);
     }
 
+    void RotateChacracterTowardMouseCursor()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 direction = mousePos - playerPos;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(-angle, Vector3.up);
+    }
+
     private void FixedUpdate()
     {
         m_movement = m_movementInput * m_movementSpeed * Time.deltaTime;
+
+        RotateChacracterTowardMouseCursor();
 
         if(m_movementInput != Vector3.zero)
         {
